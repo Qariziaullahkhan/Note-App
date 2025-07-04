@@ -80,17 +80,22 @@ class SignupScreen extends StatelessWidget {
                           emailController.text,
                           passwordController.text,
                         );
-                        Navigator.pushReplacement(
+                        if(context.mounted) {
+                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (_) => LoginScreen()),
                         );
+                        }
+                        
                       } catch (e) {
+                        if (context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Signup Failed: $e")),
                         );
                       }
                     }
-                  },
+                  }
+                },
                 ),
                 SizedBox(height: 15.h),
                 TextButton(

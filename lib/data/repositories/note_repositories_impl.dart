@@ -3,7 +3,6 @@ import 'package:note_app/domain/models/note_model.dart';
 
 class NoteRepositoriesImpl {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  @override
   Future<void> addNote(NoteModel note) async {
     try {
       await firestore.collection('notes').add(note.toJson());
@@ -13,7 +12,6 @@ class NoteRepositoriesImpl {
     }
   }
 
-  @override
   Future<void>updateNote(NoteModel note)async{
     try{
       await firestore.collection('notes').doc(note.id).update(note.toJson());
@@ -22,7 +20,6 @@ class NoteRepositoriesImpl {
       rethrow;
     }
   }
-  @override
   Future<void> deleteNote(String id) async {
     try {
       await firestore.collection('notes').doc(id).delete();
@@ -31,7 +28,6 @@ class NoteRepositoriesImpl {
       rethrow;
     }
   }
-  @override
  Stream<List<NoteModel>> getNotes() {
     return firestore.collection('notes').snapshots().map((snapshot) {
       return snapshot.docs
